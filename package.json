@@ -1,7 +1,7 @@
 {
-    "name": "phaser3-simple-platformer",
-    "version": "1.0.2",
-    "description": "A Phaser 3 Simple Platformer to show off my project portfolio",
+    "name": "escape-earth",
+    "version": "0.1.0",
+    "description": "A Phaser 3 RPG game",
     "main": "src/game.ts",
     "scripts": {
         "predeploy": "npm run build",
@@ -12,14 +12,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/hinchley2018/platformer-portfolio.git"
+        "url": "git+https://github.com/hinchley2018/escape-earth.git"
     },
     "author": "Jonathon Hinchley <jonathon.hinchley18@gmail.com> (http://www.linkedin.com/in/aggies2018)",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/hinchley2018/platformer-portfolio/issues"
+        "url": "https://github.com/hinchley2018/escape-earth/issues"
     },
-    "homepage": "https://hinchley2018.github.io/phaser-platformer",
+    "homepage": "https://escape-earth.herokuapp.com/",
     "dependencies": {},
     "devDependencies": {
         "@rollup/plugin-replace": "^2.3.4",
