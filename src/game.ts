@@ -54,6 +54,17 @@ export default class PlayerRoomScene extends Phaser.Scene
             this.player.setVelocityX(0);
             this.player.anims.play('turn');
         }
+        if (cursors.up.isDown)
+        {
+            this.player.setVelocityY(-160)
+        }
+        else if(cursors.down.isDown)
+        {
+            this.player.setVelocityY(160)
+        }
+        else {
+            this.player.setVelocityY(0)
+        }
     }
 
     addWalls() {
@@ -93,7 +104,7 @@ const gameConfig:Phaser.Types.Core.GameConfig = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: {y: 300},
+            gravity: {y: 0},
             debug: false
         }
     }
