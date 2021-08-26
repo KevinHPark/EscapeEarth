@@ -5,15 +5,12 @@ const dialogLines = [
     "You play as a civilian named Tel"
 ]
 let dialogDisplayed = true;
-const playerHouse = new Phaser.Class({
+let doorUnlocked = false;
+const PlayerHouseScene = new Phaser.Class({
     Extends: Phaser.Scene,
     
-    initialize: function MainMenuScene (){
+    initialize: function PlayerHouseScene (){
         Phaser.Scene.call(this, {key: 'playerHouse'});
-    },
-    dialogFinishedCallback: function (){
-        debugger
-        dialogDisplayed = false;
     },
     preload: function() {
         this.load.plugin("DialogModalPlugin","./dialog_plugin.js");
@@ -34,17 +31,22 @@ const playerHouse = new Phaser.Class({
         this.player.setBounce(0.2);
         this.player.setCollideWorldBounds(true);
         this.addPlayerAnimations();
-
-        //this.addWalls();
-        //this.physics.add.collider(this.player, this.walls)
-
         
-        this.sys.dialogModal.init({dialogLines: dialogLines, dialogFinishedCallback: this.dialogFinishedCallback})
+        this.sys.dialogModal.init(
+            {
+                dialogLines: dialogLines, 
+                dialogFinishedCallback: this.dialogFinishedCallback
+            }
+        )
             
     },
     update: function () {
         let cursors = this.input.keyboard.createCursorKeys();
         
+        if(doorUnlocked){
+            this.scene.start('world');
+        }
+
         if (!dialogDisplayed){
             if (cursors.left.isDown) 
             {
@@ -97,6 +99,11 @@ const playerHouse = new Phaser.Class({
             frameRate: 10,
             repeat: -1
         });
-    }
+    },
+    dialogFinishedCallback:function (){
+        dialogDisplayed = false;
+        doorUnlocked = true;
+    },
+    
 });
 

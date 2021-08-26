@@ -5,7 +5,7 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: [mainMenu, playerHouse],
+    scene: [MainMenuScene, PlayerHouseScene],
     physics: {
         default: 'arcade',
         arcade: {

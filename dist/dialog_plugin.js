@@ -111,7 +111,6 @@ var DialogModalPlugin = function (scene) {
         this._createCloseModalButtonBorder();
         if (this.dialogLines.length > 0 ){
             this.setText(dialogLines[0],true)
-            debugger
             this._createNextDialogButton(dialogFinishedCallback)
         }
         

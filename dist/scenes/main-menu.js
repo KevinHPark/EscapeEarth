@@ -1,5 +1,5 @@
-const mainMenu = new Phaser.Class({
-
+const MainMenuScene = new Phaser.Class({
+    Extends: Phaser.Scene,
     initialize: function MainMenuScene (){
         Phaser.Scene.call(this, {key: 'mainMenu'})
     },
