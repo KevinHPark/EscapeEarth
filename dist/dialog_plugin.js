@@ -49,6 +49,7 @@ var DialogModalPlugin = function (scene) {
         //used for multiple lines of dialog
         this.dialogLines = opts.dialogLines || []
         this.dialogIndex = 0;
+        this.dialogFinishedCallback = opts.dialogFinishedCallback
 
         // used for animating the text
         this.eventCounter = 0;
@@ -61,7 +62,7 @@ var DialogModalPlugin = function (scene) {
         this.graphics;
         this.closeBtn;
         // Create the dialog window
-        this._createWindow();
+        this._createWindow(this.dialogFinishedCallback);
     },
     
     //get width of game (based on scene)
@@ -99,7 +100,7 @@ var DialogModalPlugin = function (scene) {
     },
 
     // Creates the dialog window
-    _createWindow: function () {
+    _createWindow: function (dialogFinishedCallback) {
         var gameHeight = this._getGameHeight();
         var gameWidth = this._getGameWidth();
         var dimensions = this._calculateWindowDimensions(gameWidth, gameHeight);
@@ -109,8 +110,9 @@ var DialogModalPlugin = function (scene) {
         this._createCloseModalButton();
         this._createCloseModalButtonBorder();
         if (this.dialogLines.length > 0 ){
-            this._createNextDialogButton();
             this.setText(dialogLines[0],true)
+            debugger
+            this._createNextDialogButton(dialogFinishedCallback)
         }
         
     },
@@ -142,7 +144,7 @@ var DialogModalPlugin = function (scene) {
         });
     },
 
-    _createNextDialogButton: function () {
+    _createNextDialogButton: function (dialogFinishedCallback) {
         var self = this;
         this.nextDialogBtn = this.scene.make.text({
             x: this._getGameWidth() - this.padding - 14,
@@ -169,6 +171,7 @@ var DialogModalPlugin = function (scene) {
                 self.toggleWindow();
                 if (self.timedEvent) self.timedEvent.remove();
                 if (self.text) self.text.destroy();
+                dialogFinishedCallback();
             }
             else{//display next line
                 self.setText(self.dialogLines[self.dialogIndex], true);
