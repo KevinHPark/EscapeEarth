@@ -1,8 +1,7 @@
 
 //Load from api?
 const dialogLines = [
-    "Welcome to Escape Earth; a game about escaping the terror of a non-sustainable world",
-    "You play as a civilian named Tel"
+    "You play as a civilian named Tel, try to escape your house first..."
 ]
 
 class PlayerHouseScene extends Phaser.Scene{
@@ -54,15 +53,20 @@ class PlayerHouseScene extends Phaser.Scene{
         //         dialogFinishedCallback: () => this.dialogFinishedCallback()
         //     }
         // )
+        for (let index = 0; index < dialogLines.length; index++) {
+            alert(dialogLines[index])
             
+        }    
     }
     update () {
         let cursors = this.input.keyboard.createCursorKeys();
         
         if(this.doorUnlocked){
-         this.scene.start('world');
+            this.scene.start('world');
          
         }
+
+        
         
         if (!this.dialogDisplayed && !this.doorUnlocked){
             //when dialog is closed by cb this.player is undefined
@@ -128,13 +132,22 @@ class PlayerHouseScene extends Phaser.Scene{
         item.disableBody(true,true)
         
         this.inventory.push(item)
+        alert("Added a WW2 gas mask to your inventory, maybe it helps filter some pollution?")
         console.log("added to inventory", this.inventory)
     }
 
     doorCollision(player, door){
+
         console.log("door checking", this.inventory)
         if(this.inventory.length > 0){
             this.doorUnlocked = true;
+        }
+        else {
+            if(this.doorWarned === false){
+                alert("You need a gas mask to go outside, because of the toxic fumes")
+                this.doorWarned = true;
+            }
+            
         }
 
     }
