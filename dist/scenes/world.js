@@ -2,6 +2,8 @@ class WorldScene extends Phaser.Scene{
     
     constructor(){
         super('world')
+        //TODO: need a way of keeping track of which areas are unlocked and feature flagged on...
+        // the goal is to release incrementally
     }
     preload() {
         this.load.image('world-map','assets/Open-World.png')
