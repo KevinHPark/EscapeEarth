@@ -1,6 +1,5 @@
 # Escape Earth
 - Escape a world ruined by pollution
-- Uses quick-start [ts phaser project template](https://github.com/photonstorm/phaser3-typescript-project-template.git) and its [license](ts-project-template-LICENSE) combines Phaser 3.50 with [TypeScript 4](https://www.typescriptlang.org/) and uses [Rollup](https://rollupjs.org) for bundling.
 
 ## Levels
 - [Level 1](docs/Level1.md)
@@ -12,37 +11,14 @@
 [Node.js](https://nodejs.org) is required to install dependencies and run scripts via `npm`.
 
 ## Available Commands
-
-| Command | Description |
-|---------|-------------|
-| `npm install` | Install project dependencies |
-| `npm run watch` | Build project and open web server running project, watching for changes |
-| `npm run dev` | Builds project and open web server, but do not watch for changes |
-| `npm run build` | Builds code bundle with production settings (minification, no source maps, etc..) |
+`cd dist`
+`npx serve .`
 
 ## Writing Code
+- Right now all the rollup stuff is broken by incompatiblity with dialog plugin... alpha release probably won't include this unfortunately... so i'm stuck in Js for now...
+- Look at dist/ for now...
 
-After cloning the repo, run `npm install` from your project directory. Then, you can start the local development
-server by running `npm run watch`. The first time you run this you should see the following demo run:
-
-![Screenshot](screenshot.png "Phaser 3 Example")
-
-After starting the development server with `npm run watch`, you can edit any files in the `src` folder
-and Rollup will automatically recompile and reload your server (available at `http://localhost:10001`
-by default).
-
-## Configuring Rollup
-
-* Edit the file `rollup.config.dev.js` to edit the development build.
-* Edit the file `rollup.config.dist.js` to edit the distribution build.
-
-You will find lots of comments inside the rollup config files to help you do this.
-
-Note that due to the build process involved, it can take around 20 seconds to build the initial bundle. Times will vary based on CPU and local drive speeds. The development config does not minify the code in order to save build time, but it does generate source maps. If you do not require these, disable them in the config to speed it up further.
-
-## Deploy to GitHub Pages
-- This [tutorial](https://dev.to/yuribenjamin/how-to-deploy-react-app-in-github-pages-2a1f) is really nice for deploying a React app 
-- There are a few small differences, so you could fork this project and use it
-- Make sure to change your settings in package.json to point at your repository and homepage
+## Deploy to Netlify
+- Merge to main (soon to be protected by PR policy...)
 
 ## [Credits](docs/credits.md)
