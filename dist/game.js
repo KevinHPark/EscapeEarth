@@ -2,7 +2,7 @@
 // The game config that is used by Phaser
 var config = {
     type: Phaser.AUTO,
-    parent: 'phaser-example',
+    parent: 'escape-earth',
     width: 800,
     height: 600,
     scene: [MainMenuScene, PlayerHouseScene],

@@ -107,7 +107,7 @@ var DialogModalPlugin = function (scene) {
         this.graphics = this.scene.add.graphics();
         this._createOuterWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
         this._createInnerWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
-        this._createCloseModalButton();
+        this._createCloseModalButton(dialogFinishedCallback);
         this._createCloseModalButtonBorder();
         if (this.dialogLines.length > 0 ){
             this.setText(dialogLines[0],true)
@@ -117,7 +117,7 @@ var DialogModalPlugin = function (scene) {
     },
 
     // Creates the close dialog window button
-    _createCloseModalButton: function () {
+    _createCloseModalButton: function (dialogFinishedCallback) {
         var self = this;
         this.closeBtn = this.scene.make.text({
             x: this._getGameWidth() - this.padding - 14,
@@ -140,6 +140,7 @@ var DialogModalPlugin = function (scene) {
             self.toggleWindow();
             if (self.timedEvent) self.timedEvent.remove();
             if (self.text) self.text.destroy();
+            return dialogFinishedCallback();
         });
     },
 
@@ -170,7 +171,7 @@ var DialogModalPlugin = function (scene) {
                 self.toggleWindow();
                 if (self.timedEvent) self.timedEvent.remove();
                 if (self.text) self.text.destroy();
-                dialogFinishedCallback();
+                return dialogFinishedCallback();
             }
             else{//display next line
                 self.setText(self.dialogLines[self.dialogIndex], true);

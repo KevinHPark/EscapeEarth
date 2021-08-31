@@ -4,15 +4,16 @@ const dialogLines = [
     "Welcome to Escape Earth; a game about escaping the terror of a non-sustainable world",
     "You play as a civilian named Tel"
 ]
-let dialogDisplayed = true;
-let doorUnlocked = false;
-const PlayerHouseScene = new Phaser.Class({
-    Extends: Phaser.Scene,
+
+class PlayerHouseScene extends Phaser.Scene{
+    constructor() {
+        super('playerHouse');
+        this.dialogDisplayed = false
+        this.doorUnlocked = false
+        this.player = undefined;
+    }
     
-    initialize: function PlayerHouseScene (){
-        Phaser.Scene.call(this, {key: 'playerHouse'});
-    },
-    preload: function() {
+    preload() {
         this.load.plugin("DialogModalPlugin","./dialog_plugin.js");
         this.load.image('player-house','assets/player-house.png');
 
@@ -21,8 +22,9 @@ const PlayerHouseScene = new Phaser.Class({
             'assets/dude.png',
             {frameWidth: 32, frameHeight: 48}
         );
-    }, 
-    create: function () {
+    }
+    create() {
+        
         this.sys.install("DialogModalPlugin");
     
         this.add.image(400,300,'player-house');
@@ -32,22 +34,23 @@ const PlayerHouseScene = new Phaser.Class({
         this.player.setCollideWorldBounds(true);
         this.addPlayerAnimations();
         
-        this.sys.dialogModal.init(
-            {
-                dialogLines: dialogLines, 
-                dialogFinishedCallback: this.dialogFinishedCallback
-            }
-        )
+        // this.sys.dialogModal.init(
+        //     {
+        //         dialogLines: dialogLines, 
+        //         dialogFinishedCallback: () => this.dialogFinishedCallback()
+        //     }
+        // )
             
-    },
-    update: function () {
+    }
+    update () {
         let cursors = this.input.keyboard.createCursorKeys();
         
-        if(doorUnlocked){
+        if(this.doorUnlocked){
             this.scene.start('world');
         }
 
-        if (!dialogDisplayed){
+        if (!this.dialogDisplayed){
+            //debugger
             if (cursors.left.isDown) 
             {
                 this.player.setVelocityX(-160);
@@ -63,6 +66,7 @@ const PlayerHouseScene = new Phaser.Class({
                 this.player.setVelocityX(0);
                 this.player.anims.play('turn');
             }
+
             if (cursors.up.isDown)
             {
                 this.player.setVelocityY(-160)
@@ -76,7 +80,7 @@ const PlayerHouseScene = new Phaser.Class({
             }
         }
         
-    },
+    }
     
     addPlayerAnimations()
     {
@@ -99,11 +103,11 @@ const PlayerHouseScene = new Phaser.Class({
             frameRate: 10,
             repeat: -1
         });
-    },
-    dialogFinishedCallback:function (){
-        dialogDisplayed = false;
-        doorUnlocked = true;
-    },
+    }
+    dialogFinishedCallback (){
+        this.dialogDisplayed = false;
+        this.doorUnlocked = true;
+    }
     
-});
+};
 
