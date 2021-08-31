@@ -50,7 +50,8 @@ class PlayerHouseScene extends Phaser.Scene{
         }
 
         if (!this.dialogDisplayed){
-            //debugger
+            //when dialog is closed by cb this.player is undefined
+            //https://github.com/hinchley2018/escape-earth/projects/1#card-67822843
             if (cursors.left.isDown) 
             {
                 this.player.setVelocityX(-160);
@@ -105,6 +106,7 @@ class PlayerHouseScene extends Phaser.Scene{
         });
     }
     dialogFinishedCallback (){
+        
         this.dialogDisplayed = false;
         this.doorUnlocked = true;
     }
