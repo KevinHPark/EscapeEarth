@@ -5,7 +5,7 @@ var config = {
     parent: 'escape-earth',
     width: 800,
     height: 600,
-    scene: [MainMenuScene, PlayerHouseScene],
+    scene: [MainMenuScene, PlayerHouseScene, WorldScene],
     physics: {
         default: 'arcade',
         arcade: {

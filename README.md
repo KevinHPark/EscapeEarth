@@ -44,3 +44,5 @@ Note that due to the build process involved, it can take around 20 seconds to bu
 - This [tutorial](https://dev.to/yuribenjamin/how-to-deploy-react-app-in-github-pages-2a1f) is really nice for deploying a React app 
 - There are a few small differences, so you could fork this project and use it
 - Make sure to change your settings in package.json to point at your repository and homepage
+
+## [Credits](docs/credits.md)

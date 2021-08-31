@@ -9,14 +9,17 @@ class PlayerHouseScene extends Phaser.Scene{
     constructor() {
         super('playerHouse');
         this.dialogDisplayed = false
+        this.doorWarned = false
         this.doorUnlocked = false
         this.player = undefined;
+        this.inventory = []
     }
     
     preload() {
         this.load.plugin("DialogModalPlugin","./dialog_plugin.js");
         this.load.image('player-house','assets/player-house.png');
-
+        this.load.image('gasMask','assets/gasmask.png');
+        this.load.image('garageDoor','assets/SciFi_Door_Pixel.png')
         //TODO: load spritesheet for RPG, we can't use this one in a private-source game
         this.load.spritesheet('dude',
             'assets/dude.png',
@@ -33,7 +36,18 @@ class PlayerHouseScene extends Phaser.Scene{
         this.player.setBounce(0.2);
         this.player.setCollideWorldBounds(true);
         this.addPlayerAnimations();
+
+        //items that are collectable
+        this.levelItems = this.physics.add.staticGroup();
+        this.levelItems.create(150,300, 'gasMask')
+        this.physics.add.overlap(this.player, this.levelItems, this.collectItem, null, this)
         
+        //door to collide with
+        this.levelDoor = this.physics.add.staticGroup();
+        this.levelDoor.create(650,60, 'garageDoor')
+        this.physics.add.overlap(this.player,this.levelDoor, this.doorCollision,null,this )
+
+        //commented out dialog system while its breaking player movement...
         // this.sys.dialogModal.init(
         //     {
         //         dialogLines: dialogLines, 
@@ -46,10 +60,11 @@ class PlayerHouseScene extends Phaser.Scene{
         let cursors = this.input.keyboard.createCursorKeys();
         
         if(this.doorUnlocked){
-            this.scene.start('world');
+         this.scene.start('world');
+         
         }
-
-        if (!this.dialogDisplayed){
+        
+        if (!this.dialogDisplayed && !this.doorUnlocked){
             //when dialog is closed by cb this.player is undefined
             //https://github.com/hinchley2018/escape-earth/projects/1#card-67822843
             if (cursors.left.isDown) 
@@ -108,8 +123,20 @@ class PlayerHouseScene extends Phaser.Scene{
     dialogFinishedCallback (){
         
         this.dialogDisplayed = false;
-        this.doorUnlocked = true;
     }
-    
+    collectItem(player, item) {
+        item.disableBody(true,true)
+        
+        this.inventory.push(item)
+        console.log("added to inventory", this.inventory)
+    }
+
+    doorCollision(player, door){
+        console.log("door checking", this.inventory)
+        if(this.inventory.length > 0){
+            this.doorUnlocked = true;
+        }
+
+    }
 };
 

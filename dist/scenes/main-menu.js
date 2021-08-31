@@ -1,12 +1,12 @@
-const MainMenuScene = new Phaser.Class({
-    Extends: Phaser.Scene,
-    initialize: function MainMenuScene (){
-        Phaser.Scene.call(this, {key: 'mainMenu'})
-    },
-    preload: function() {
+class MainMenuScene extends Phaser.Scene{
+    
+    constructor (){
+        super('mainMenu')
+    }
+    preload() {
         this.load.image('splashscreen','assets/placeholder-main-menu.png')
-    },
-    create: function() {
+    }
+    create() {
         this.add.image(400,300,'splashscreen')
 
         //clicking starts the game
@@ -18,4 +18,4 @@ const MainMenuScene = new Phaser.Class({
 
         }, this);
     }
-})
+}
