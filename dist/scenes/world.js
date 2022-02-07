@@ -11,7 +11,7 @@ class WorldScene extends Phaser.Scene{
     create() {
         this.add.image(400,300,'world-map')
 
-        //goes back to playerHouse for now
+        //goes back to playerHouse for now BLEH
         this.input.once('pointerdown', function () {
             this.scene.start('playerHouse');
 
